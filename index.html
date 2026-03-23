@@ -93,25 +93,37 @@
     /* ===== Scroll Reveal ===== */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) translateX(0);
+    }
+
+    .reveal-left {
+      transform: translateX(-40px);
+    }
+
+    .reveal-right {
+      transform: translateX(40px);
     }
 
     .reveal-delay-1 {
-      transition-delay: 0.1s;
+      transition-delay: 0.12s;
     }
 
     .reveal-delay-2 {
-      transition-delay: 0.2s;
+      transition-delay: 0.24s;
     }
 
     .reveal-delay-3 {
-      transition-delay: 0.3s;
+      transition-delay: 0.36s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.48s;
     }
 
     /* ===== Navigation ===== */
@@ -246,6 +258,7 @@
       background: rgba(217, 119, 6, 0.06);
       top: -120px;
       right: -100px;
+      animation: orbFloat1 8s ease-in-out infinite;
     }
 
     .orb-2 {
@@ -254,6 +267,7 @@
       background: rgba(180, 83, 9, 0.05);
       bottom: -80px;
       left: -80px;
+      animation: orbFloat2 10s ease-in-out infinite;
     }
 
     .orb-3 {
@@ -262,6 +276,20 @@
       background: rgba(245, 158, 11, 0.06);
       top: 40%;
       left: 60%;
+      animation: orbFloat3 7s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 20px) scale(1.05); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(25px, -15px) scale(1.08); }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-15px, 25px) scale(1.1); }
     }
 
     .hero-content {
@@ -515,107 +543,155 @@
     .about-graphic {
       width: 320px;
       height: 320px;
-      border-radius: 24px;
-      background: var(--bg-alt);
+      border-radius: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 6rem;
+      overflow: hidden;
       position: relative;
+      border: 3px solid var(--accent);
+      box-shadow: var(--shadow-md);
     }
 
-    .about-graphic::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 28px;
-      border: 2px dashed rgba(217, 119, 6, 0.15);
+    .about-graphic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
     }
 
     /* ===== Skills ===== */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+    .skills-subtitle {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      max-width: 560px;
+      margin-bottom: 28px;
+      margin-top: -32px;
     }
 
-    .skills-group {
-      position: relative;
-      padding: 32px 28px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .skills-group:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .skills-category {
-      font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 0.72rem;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .skills-number {
-      position: absolute;
-      top: 18px;
-      right: 24px;
-      font-family: var(--font-display);
-      font-size: 4rem;
-      line-height: 1;
-      color: var(--text);
-      opacity: 0.06;
-      pointer-events: none;
-    }
-
-    .skills-group-title {
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 1.15rem;
-      margin-bottom: 20px;
-      color: var(--text);
-    }
-
-    .skill-pills {
+    .skills-filters {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      margin-bottom: 36px;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
+    .filter-btn {
+      padding: 8px 22px;
       border-radius: 50px;
+      font-family: var(--font-body);
       font-size: 0.88rem;
-      font-weight: 400;
-      background: var(--bg-card);
-      border: 1.5px solid var(--border);
-      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
       transition: all 0.25s;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1.5px solid var(--border);
     }
 
-    .pill::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--gradient);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .skill-card.hidden {
+      display: none;
+    }
+
+    .skill-card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .skill-card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-soft);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
       flex-shrink: 0;
     }
 
-    .pill:hover {
-      border-color: var(--accent);
+    .skill-card-info {
+      flex: 1;
+    }
+
+    .skill-card-name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .skill-card-cat {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .skill-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .skill-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--accent-light);
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 50px;
+      background: var(--gradient);
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .skill-percent {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.88rem;
       color: var(--accent);
+      min-width: 36px;
+      text-align: right;
     }
 
     /* ===== Projects ===== */
@@ -856,42 +932,43 @@
     .cert-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      gap: 24px;
     }
 
     .cert-item {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 24px;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.35s, box-shadow 0.35s;
+      display: flex;
+      flex-direction: column;
     }
 
     .cert-item:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
     }
 
-    .cert-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--gradient-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.2rem;
+    .cert-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: top;
+      border-bottom: 1px solid var(--border);
+      display: block;
+    }
+
+    .cert-body {
+      padding: 20px 22px 18px;
     }
 
     .cert-name {
       font-family: var(--font-heading);
       font-weight: 600;
-      font-size: 0.98rem;
-      margin-bottom: 4px;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--text);
     }
 
     .cert-meta {
@@ -1042,10 +1119,6 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .skills-number {
-        font-size: 3.5rem;
-      }
-
       .about-visual {
         order: -1;
       }
@@ -1105,11 +1178,7 @@
       }
 
       .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .skills-number {
-        font-size: 3rem;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .stat-number {
@@ -1234,13 +1303,19 @@
       background: var(--bg-card);
     }
 
-    [data-theme="dark"] .skills-group {
+    [data-theme="dark"] .skill-card {
       background: var(--bg-card);
       border-color: var(--border);
     }
 
-    [data-theme="dark"] .skills-number {
-      opacity: 0.08;
+    [data-theme="dark"] .filter-btn {
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+
+    [data-theme="dark"] .filter-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
     }
 
     [data-theme="dark"] .achievement-card {
@@ -1267,16 +1342,7 @@
       color: rgba(255, 255, 255, 0.35);
     }
 
-    [data-theme="dark"] .pill {
-      background: rgba(245, 158, 11, 0.06);
-      border-color: var(--border);
-      color: var(--text-muted);
-    }
 
-    [data-theme="dark"] .pill:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
 
     [data-theme="dark"] .hero-socials a {
       background: rgba(245, 158, 11, 0.06);
@@ -1380,6 +1446,168 @@
 
     [data-theme="dark"] .theme-toggle .icon-sun {
       display: block;
+    }
+
+    /* ===== Professional Animations ===== */
+
+    /* Hero entrance — staggered fade-up on load */
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero-label  { animation: heroFadeIn 0.8s ease-out 0.2s both; }
+    .hero-name   { animation: heroFadeIn 0.8s ease-out 0.35s both; }
+    .typewriter-wrapper { animation: heroFadeIn 0.8s ease-out 0.5s both; }
+    .hero-tagline { animation: heroFadeIn 0.8s ease-out 0.65s both; }
+    .hero-actions { animation: heroFadeIn 0.8s ease-out 0.8s both; }
+    .hero-socials { animation: heroFadeIn 0.8s ease-out 0.95s both; }
+
+    /* Gradient shimmer on gradient-text */
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .gradient-text {
+      background-size: 200% auto;
+      animation: shimmer 4s linear infinite;
+    }
+    .footer-brand {
+      background-size: 200% auto;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* Section label animated underline */
+    .section-label {
+      position: relative;
+      display: inline-block;
+    }
+    .section-label::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      border-radius: 2px;
+      transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-label.visible::after {
+      width: 100%;
+    }
+
+    /* Enhanced card hover glow */
+    .project-card:hover {
+      box-shadow: 0 12px 40px rgba(217, 119, 6, 0.12);
+    }
+    .skill-card:hover {
+      box-shadow: 0 8px 32px rgba(217, 119, 6, 0.10);
+    }
+    .cert-item:hover {
+      box-shadow: 0 12px 40px rgba(217, 119, 6, 0.10);
+    }
+    .stat:hover {
+      box-shadow: 0 6px 20px rgba(217, 119, 6, 0.10);
+    }
+
+    /* Button hover pulse */
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+    .btn-outline:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Social icon bounce */
+    .hero-socials a:hover {
+      transform: translateY(-3px) scale(1.08);
+    }
+
+    /* Scroll-top bounce */
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .scroll-top.show {
+      animation: gentleBounce 2s ease-in-out infinite;
+    }
+    .scroll-top:hover {
+      animation: none;
+    }
+
+    /* About graphic float */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .about-graphic {
+      animation: gentleFloat 4s ease-in-out infinite;
+    }
+
+    /* Stat number count-up feel (subtle scale on reveal) */
+    .stat.visible .stat-number {
+      animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    /* Filter button active transition */
+    .filter-btn {
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .filter-btn.active {
+      transform: scale(1.05);
+    }
+    .filter-btn.active:hover {
+      transform: scale(1.05);
+    }
+
+    /* Timeline dot pulse */
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(217, 119, 6, 0); }
+    }
+    .timeline-dot {
+      animation: dotPulse 2.5s ease-in-out infinite;
+    }
+
+    /* Nav link hover — smooth color */
+    .nav-links a {
+      transition: color 0.25s ease, transform 0.2s ease;
+    }
+    .nav-links a:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Dark-mode glow adjustments */
+    [data-theme="dark"] .project-card:hover {
+      box-shadow: 0 12px 40px rgba(245, 158, 11, 0.08);
+    }
+    [data-theme="dark"] .skill-card:hover {
+      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.08);
+    }
+    [data-theme="dark"] .cert-item:hover {
+      box-shadow: 0 12px 40px rgba(245, 158, 11, 0.06);
+    }
+    [data-theme="dark"] .stat:hover {
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.08);
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -1519,7 +1747,9 @@
             </div>
           </div>
           <div class="about-visual reveal">
-            <div class="about-graphic">👨‍💻</div>
+            <div class="about-graphic">
+              <img src="profile.jpg" alt="Likhith Ashish" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
@@ -1530,66 +1760,242 @@
       <div class="container">
         <p class="section-label reveal">Skills</p>
         <h2 class="section-title reveal">What I work with</h2>
+        <p class="skills-subtitle reveal">A showcase of technologies I've mastered on my journey as a developer.</p>
 
-        <div class="skills-grid">
-          <div class="skills-group reveal">
-            <span class="skills-category">Core</span>
-            <span class="skills-number">01</span>
-            <h3 class="skills-group-title">Languages</h3>
-            <div class="skill-pills">
-              <span class="pill">C</span>
-              <span class="pill">C++</span>
-              <span class="pill">Python</span>
-              <span class="pill">Java</span>
+        <div class="skills-filters reveal">
+          <button class="filter-btn active" data-filter="all">All Skills</button>
+          <button class="filter-btn" data-filter="programming">Programming Languages</button>
+          <button class="filter-btn" data-filter="datascience">Data Science</button>
+          <button class="filter-btn" data-filter="tools">Tools</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+          <!-- Programming Languages -->
+          <div class="skill-card reveal" data-category="programming">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🐍</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Python</div>
+                <div class="skill-card-cat">Programming Languages</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
+              <span class="skill-percent">85%</span>
             </div>
           </div>
 
-          <div class="skills-group reveal">
-            <span class="skills-category">Frontend</span>
-            <span class="skills-number">02</span>
-            <h3 class="skills-group-title">Web &amp; Frameworks</h3>
-            <div class="skill-pills">
-              <span class="pill">HTML</span>
-              <span class="pill">CSS</span>
+          <div class="skill-card reveal" data-category="programming">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">⚙️</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">C++</div>
+                <div class="skill-card-cat">Programming Languages</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
+              <span class="skill-percent">90%</span>
             </div>
           </div>
 
-          <div class="skills-group reveal">
-            <span class="skills-category">Intelligence</span>
-            <span class="skills-number">03</span>
-            <h3 class="skills-group-title">Data &amp; Analytics</h3>
-            <div class="skill-pills">
-              <span class="pill">Data Visualization</span>
-              <span class="pill">ML Basics</span>
-              <span class="pill">Predictive Analysis</span>
-              <span class="pill">Scikit-learn</span>
+          <div class="skill-card reveal" data-category="programming">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🔤</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">C</div>
+                <div class="skill-card-cat">Programming Languages</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
+              <span class="skill-percent">80%</span>
             </div>
           </div>
 
-          <div class="skills-group reveal">
-            <span class="skills-category">Environment</span>
-            <span class="skills-number">04</span>
-            <h3 class="skills-group-title">Tools &amp; Platforms</h3>
-            <div class="skill-pills">
-              <span class="pill">MySQL</span>
-              <span class="pill">Jupyter Notebook</span>
-              <span class="pill">Excel</span>
-              <span class="pill">Power BI</span>
-              <span class="pill">GitHub</span>
-              <span class="pill">Visual Studio Code</span>
-              <span class="pill">Antigravity</span>
+          <div class="skill-card reveal" data-category="programming">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">☕</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Java</div>
+                <div class="skill-card-cat">Programming Languages</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="83%"></div></div>
+              <span class="skill-percent">83%</span>
             </div>
           </div>
 
-          <div class="skills-group reveal">
-            <span class="skills-category">Human</span>
-            <span class="skills-number">05</span>
-            <h3 class="skills-group-title">Soft Skills</h3>
-            <div class="skill-pills">
-              <span class="pill">Problem-Solving</span>
-              <span class="pill">Team Player</span>
-              <span class="pill">Adaptability</span>
-              <span class="pill">Leadership</span>
+          <!-- Data Science -->
+          <div class="skill-card reveal" data-category="datascience">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">📊</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Data Visualization</div>
+                <div class="skill-card-cat">Data Science</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="82%"></div></div>
+              <span class="skill-percent">82%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="datascience">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🤖</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">ML Basics</div>
+                <div class="skill-card-cat">Data Science</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
+              <span class="skill-percent">80%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="datascience">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🔮</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Predictive Analysis</div>
+                <div class="skill-card-cat">Data Science</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
+              <span class="skill-percent">85%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="datascience">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🧪</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Scikit-learn</div>
+                <div class="skill-card-cat">Data Science</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="70%"></div></div>
+              <span class="skill-percent">70%</span>
+            </div>
+          </div>
+
+          <!-- Tools -->
+          <div class="skill-card reveal" data-category="tools">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🗄️</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">MySQL</div>
+                <div class="skill-card-cat">Tools</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="75%"></div></div>
+              <span class="skill-percent">75%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="tools">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">📓</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Jupyter Notebook</div>
+                <div class="skill-card-cat">Tools</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
+              <span class="skill-percent">80%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="tools">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">📗</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Excel</div>
+                <div class="skill-card-cat">Tools</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
+              <span class="skill-percent">85%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="tools">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">📈</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">Power BI</div>
+                <div class="skill-card-cat">Tools</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
+              <span class="skill-percent">85%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="tools">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🐙</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">GitHub</div>
+                <div class="skill-card-cat">Tools</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
+              <span class="skill-percent">80%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="tools">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">💻</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">VS Code</div>
+                <div class="skill-card-cat">Tools</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
+              <span class="skill-percent">90%</span>
+            </div>
+          </div>
+
+          <!-- Web -->
+          <div class="skill-card reveal" data-category="web">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">🌐</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">HTML / CSS</div>
+                <div class="skill-card-cat">Web</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="80%"></div></div>
+              <span class="skill-percent">80%</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal" data-category="web">
+            <div class="skill-card-top">
+              <div class="skill-card-icon">⚡</div>
+              <div class="skill-card-info">
+                <div class="skill-card-name">JavaScript</div>
+                <div class="skill-card-cat">Web</div>
+              </div>
+            </div>
+            <div class="skill-bar-wrap">
+              <div class="skill-bar"><div class="skill-bar-fill" data-width="70%"></div></div>
+              <span class="skill-percent">70%</span>
             </div>
           </div>
         </div><!-- /skills-grid -->
@@ -1791,53 +2197,41 @@
         <h2 class="section-title reveal">Credentials I've earned</h2>
 
         <div class="cert-list">
-          <div class="cert-item reveal">
-            <div class="cert-icon">🤖</div>
-            <div>
-              <p class="cert-name"><a href="infosys build genrative.pdf" target="_blank" rel="noopener noreferrer"
-                  style="color: inherit; text-decoration: none;">Build Generative AI Apps &amp; Solutions with No-Code
-                  Tools <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="vertical-align: middle; margin-left: 4px;">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg></a></p>
+          <a href="infosys build genrative.pdf" target="_blank" rel="noopener noreferrer" class="cert-item reveal" style="text-decoration:none; color:inherit;">
+            <img src="cert-infosys.png" alt="Infosys GenAI Certificate" class="cert-img" loading="lazy">
+            <div class="cert-body">
+              <p class="cert-name">Build Generative AI Apps &amp; Solutions with No-Code Tools
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:4px;">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </p>
               <p class="cert-meta">Infosys &bull; May 2025 &bull; AI / GenAI</p>
             </div>
-          </div>
-          <div class="cert-item reveal">
-            <div class="cert-icon">💻</div>
-            <div>
-              <p class="cert-name"><a href="Google certificate.pdf" target="_blank" rel="noopener noreferrer"
-                  style="color: inherit; text-decoration: none;">Google Hackathon Certificate <svg
-                    xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="vertical-align: middle; margin-left: 4px;">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg></a></p>
+          </a>
+
+          <a href="Google certificate.pdf" target="_blank" rel="noopener noreferrer" class="cert-item reveal" style="text-decoration:none; color:inherit;">
+            <img src="cert-google.png" alt="Google Hackathon Certificate" class="cert-img" loading="lazy">
+            <div class="cert-body">
+              <p class="cert-name">Google Hackathon Certificate
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:4px;">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </p>
               <p class="cert-meta">Google &bull; Oct 2023</p>
             </div>
-          </div>
+          </a>
 
-          <div class="cert-item reveal">
-            <div class="cert-icon">🌐</div>
-            <div>
-              <p class="cert-name"><a
-                  href="https://www.freecodecamp.org/certification/fcce3ee8b28-c071-4dec-af3e-b58cf033284b/responsive-web-design"
-                  target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Responsive
-                  Web Design <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="vertical-align: middle; margin-left: 4px;">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg></a></p>
+          <a href="https://www.freecodecamp.org/certification/fcce3ee8b28-c071-4dec-af3e-b58cf033284b/responsive-web-design" target="_blank" rel="noopener noreferrer" class="cert-item reveal" style="text-decoration:none; color:inherit;">
+            <img src="cert-datascience.png" alt="Data Science Training Certificate" class="cert-img" loading="lazy">
+            <div class="cert-body">
+              <p class="cert-name">Responsive Web Design
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-left:4px;">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </p>
               <p class="cert-meta">freeCodeCamp &bull; Aug 2023 &bull; Web Development</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -1983,6 +2377,38 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Skills filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const skillCards = document.querySelectorAll('.skill-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        skillCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Progress bar animation
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fill = entry.target.querySelector('.skill-bar-fill');
+          if (fill && fill.dataset.width) {
+            fill.style.width = fill.dataset.width;
+          }
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.skill-card').forEach(c => barObserver.observe(c));
 
     // Typewriter effect
     const typewriterEl = document.getElementById('typewriter');
